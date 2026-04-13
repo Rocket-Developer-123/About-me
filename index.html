@@ -3,68 +3,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ridhaan's Biography</title>
+    <title>Ridhaan | Developer & Hacker</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            background: linear-gradient(135deg, #0e0e15, #121212);
-            color: white;
-            font-family: 'Arial', sans-serif;
+        /* --- CSS Variables for Cyberpunk Theme --- */
+        :root {
+            --bg-color: #08080a;
+            --grid-color: rgba(0, 243, 255, 0.05);
+            --neon-cyan: #00f3ff;
+            --neon-purple: #bc13fe;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --glass-bg: rgba(15, 15, 20, 0.6);
+            --glass-border: rgba(0, 243, 255, 0.2);
+        }
+
+        /* --- Global Reset & Body Styling --- */
+        * {
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            box-sizing: border-box;
         }
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
-        }
-        h1 {
-            text-align: center;
-            color: #00ffcc;
-            text-shadow: 0 0 20px #00ffcc;
-        }
-        p {
+
+        body {
+            background-color: var(--bg-color);
+            /* Creating the subtle background grid */
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+            color: var(--text-main);
+            font-family: 'Fira Code', monospace; /* Monospace for standard text */
             line-height: 1.6;
-            margin: 10px 0;
+            overflow-x: hidden;
         }
-        .neon-button {
-            background: #00ffcc;
-            color: black;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            cursor: pointer;
-            text-shadow: 0 0 5px #00ffcc;
-            transition: transform 0.3s;
+
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif; /* Sleek font for headings */
+            letter-spacing: 1.5px;
         }
-        .neon-button:hover {
-            transform: scale(1.1);
+
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
         }
-        /* Responsive design */
-        @media (max-width: 600px) {
-            .container {
-                width: 90%;
-            }
-            h1 {
-                font-size: 1.5em;
-            }
+
+        /* Glowing profile image placeholder */
+        .profile-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 2rem;
+            padding: 5px;
+            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.4);
+            animation: pulseGlow 3s infinite alternate;
+        }
+
+        .profile-container img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: #111; /* Fallback color if image is empty */
+            border: 4px solid var(--bg-color);
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 20px rgba(0, 243, 255, 0.3); }
+            100% { box-shadow: 0 0 50px rgba(188, 19, 254, 0.6); }
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            color: #fff;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .hero h2 {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--neon-purple);
+            min-height: 30px; /* Prevents layout shift during typing */
+            text-shadow: 0 0 5px var(--neon-purple);
+        }
+
+        /* Blinking cursor for typing effect */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            background-color: var(--neon-purple);
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* --- Content Layout (CSS Grid) --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        /* --- Glassmorphism Cards --- */
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            opacity: 0; /* Hidden by default for scroll animation */
+            transform: translateY(30px);
+        }
+
+        /* Card Hover Effects */
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2), inset 0 0 15px rgba(0, 243, 255, 0.05);
+        }
+
+        .card h3 {
+            color: var(--neon-cyan);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* --- Special Highlight for The Future Vision --- */
+        .card.vision-card {
+            grid-column: 1 / -1; /* Makes this card span the full width */
+            border-color: rgba(188, 19, 254, 0.3);
+            background: linear-gradient(135deg, rgba(20, 10, 30, 0.8), rgba(15, 15, 20, 0.8));
+        }
+
+        .card.vision-card:hover {
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 25px rgba(188, 19, 254, 0.3), inset 0 0 15px rgba(188, 19, 254, 0.1);
+        }
+
+        .card.vision-card h3 {
+            color: var(--neon-purple);
+            border-bottom-color: rgba(188, 19, 254, 0.3);
+        }
+
+        .highlight-text {
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 0 0 5px var(--neon-purple);
+        }
+
+        /* Animation class added by JavaScript */
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 768px) {
+            .container { padding: 2rem 1rem; }
+            .card { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to Ridhaan's Biography</h1>
-        <p>Ridhaan is a passionate developer with a flair for creating immersive experiences that blend technology and artistry.</p>
-        <p>He has worked on numerous projects that showcase his skills in front-end and back-end development, focusing on cyberpunk themes and futuristic designs.</p>
-        <p>With a keen eye for detail and a commitment to excellence, Ridhaan is always pushing the boundaries of what's possible in web development.</p>
-        <button class="neon-button">Learn More</button>
-    </div>
+
+    <header class="hero">
+        <div class="profile-container">
+            <img src="YOUR_IMAGE_PATH_HERE.jpg" alt="Ridhaan">
+        </div>
+        <h1>Ridhaan</h1>
+        <h2><span id="typed-text"></span><span class="cursor">&nbsp;</span></h2>
+    </header>
+
+    <main class="container">
+        
+        <article class="card">
+            <h3>The Spark and the Setup</h3>
+            <p>Ridhaan’s fascination with technology began simply as a natural curiosity about devices and how they operated. This early interest quickly evolved from just using technology to wanting to understand the mechanics behind it.</p>
+            <p>Today, working from a standard, medium-spec Acer laptop, Ridhaan tackles programming with a relentless mindset. When faced with a challenging bug or a complex piece of logic, the philosophy is simple but powerful: the code must be completed, whatever it takes to do so.</p>
+        </article>
+
+        <article class="card">
+            <h3>Organic Ideation & Development</h3>
+            <p>As a developer who is actively learning and experimenting, Ridhaan doesn't sit down and force ideas to appear. Instead, inspiration strikes organically from the real world. A perfect example of this natural curiosity was a trip to the store; watching a cashier scan a barcode and seeing the item instantly appear on the screen sparked a desire to understand the mechanism, prompting Ridhaan to immediately start building a simulated version of it.</p>
+            <p>Currently, this spontaneous creativity is being channeled into a new project: developing an interactive web platform that hosts a variety of unique, engaging mini-games, inspired by sites like <em>neal.fun</em>.</p>
+        </article>
+
+        <article class="card">
+            <h3>Technical Approach</h3>
+            <p>Ridhaan is building a strong foundation in core web technologies. The development process is focused on writing and understanding code directly, utilizing a little AI purely as an assistive tool to improve existing code and efficiently check for errors. This ensures a hands-on learning experience while maintaining high-quality output.</p>
+        </article>
+
+        <article class="card">
+            <h3>The Discipline: Academics and Free Time</h3>
+            <p>Balancing academics and a passion for coding requires strict discipline. For Ridhaan, study time is a daily, non-negotiable priority. However, programming is never left behind; it is woven into any available free time, with deep dives into coding happening during weekends, summer holidays, and winter vacations.</p>
+        </article>
+
+        <article class="card">
+            <h3>Beyond the Screen</h3>
+            <p>When stepping away from the keyboard, Ridhaan steps into entirely different worlds. A massive film enthusiast, Ridhaan has watched an uncountable number of movies across various genres. In addition to cinema, mobile gaming serves as a primary way to unwind and disconnect. To Ridhaan, the creative escapism of movies and the logical world of software development are two completely separate, equally enjoyed realms.</p>
+        </article>
+
+        <article class="card vision-card">
+            <h3>The Future Vision</h3>
+            <p>Looking ahead, Ridhaan has set highly ambitious and definitive goals. The primary academic milestone is to <span class="highlight-text">crack the highly competitive JEE and secure a seat at an Indian Institute of Technology (IIT)</span>.</p>
+            <p>Ultimately, the career vision is absolute mastery: Ridhaan aims to become an <span class="highlight-text">expert-level, highly skilled programmer, developer, and hacker</span>, intending to conquer and understand every facet of computer science and software engineering.</p>
+        </article>
+
+    </main>
+
+    <script>
+        // 1. Typing Effect for the Subtitle
+        const subtitleText = "Aspiring Expert Programmer, Developer & Hacker";
+        const typedTextElement = document.getElementById("typed-text");
+        let charIndex = 0;
+
+        function typeWriter() {
+            if (charIndex < subtitleText.length) {
+                typedTextElement.textContent += subtitleText.charAt(charIndex);
+                charIndex++;
+                // Randomize typing speed slightly for a realistic hacker feel
+                let typingSpeed = Math.floor(Math.random() * (100 - 40 + 1)) + 40;
+                setTimeout(typeWriter, typingSpeed);
+            }
+        }
+
+        // Start typing slightly after the page loads
+        setTimeout(typeWriter, 500);
+
+        // 2. Scroll Animation (Fade in & slide up)
+        const cards = document.querySelectorAll('.card');
+
+        // Create an Intersection Observer to watch when elements enter the screen
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // If the card is in the viewport, add the 'visible' class
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Stop observing once it's visible so it doesn't animate again
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, {
+            threshold: 0.1, // Trigger when 10% of the element is visible
+            rootMargin: "0px 0px -50px 0px" // Trigger slightly before it hits the bottom
+        });
+
+        // Attach the observer to every card
+        cards.forEach(card => {
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>
