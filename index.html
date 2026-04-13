@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ridhaan's Biography</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0e0e15, #121212);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+        }
+        h1 {
+            text-align: center;
+            color: #00ffcc;
+            text-shadow: 0 0 20px #00ffcc;
+        }
+        p {
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+        .neon-button {
+            background: #00ffcc;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            text-shadow: 0 0 5px #00ffcc;
+            transition: transform 0.3s;
+        }
+        .neon-button:hover {
+            transform: scale(1.1);
+        }
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Ridhaan's Biography</h1>
+        <p>Ridhaan is a passionate developer with a flair for creating immersive experiences that blend technology and artistry.</p>
+        <p>He has worked on numerous projects that showcase his skills in front-end and back-end development, focusing on cyberpunk themes and futuristic designs.</p>
+        <p>With a keen eye for detail and a commitment to excellence, Ridhaan is always pushing the boundaries of what's possible in web development.</p>
+        <button class="neon-button">Learn More</button>
+    </div>
+</body>
+</html>
